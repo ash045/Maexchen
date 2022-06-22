@@ -86,10 +86,10 @@ public class GameView extends HorizontalLayout {
     	return scoreboard;
     }
     
-    //Hier muss das Spiel an sich konfiguriert werden also der Screen
+    //Hier muss das Spiel an sich konfiguriert werden also der Screen, man sollte evtl ein schärferes Bild nehmen aber worst case mäßig gehts
     private Image configGameScreen() {
-    	Image img = new Image("images/empty-plant.png", "placeholder plant");
-        img.setWidth("200px");
+    	Image img = new Image("images/tisch.jpg","Tisch");
+        img.setSizeFull();
         return img;
     }
     
