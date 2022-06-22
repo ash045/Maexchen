@@ -19,7 +19,7 @@ public class StartView extends VerticalLayout{
 		//Hier ist Platz für einen Link zu einer anderen Route
 		startbutton.addClickListener(e ->
 	    	startbutton.getUI().ifPresent(ui ->
-	           ui.navigate(""))
+	           ui.navigate("/game"))
 		);
 		
 		Button backbutton = new Button("Back");
