@@ -61,18 +61,25 @@ public class GameView extends HorizontalLayout {
         return toolbar;
     }
     
+    //Hier kann man die Variablen dann setzen
+    private void configFields() {
+        //Damit kein Fehler kommt, wenn die Tabelle leer ist
+    	try{
+    		numPlayers = (int) service.countplayer();
+    	}
+    	catch(Exception e) {
+    		numPlayers = 0;
+    	}
+    }
+    
+    
     //Das macht die Informationen unten, das muss noch angepasst werden, damit eben nicht alles immer angezeigt wird sondenr nur abhängig des GameModes
     private VerticalLayout getLabel() {
     	VerticalLayout label = new VerticalLayout();
-    	numPlayersField.setReadOnly(true);
-//    	numPlayers = service.countplayer(); Hier müssen Werte drin sein, sonst gibt es einen Fehler, das sollte man catchen
-    	numPlayersField.setValue(numPlayers + " Players");
     	
-        numRoundsField.setReadOnly(true);
-        numRoundsField.setValue(numRounds + "Rounds left");
-        
-        pointLimitField.setReadOnly(true);
-        pointLimitField.setValue(pointLimit + "Point limit");
+    	numPlayersField.setText(numPlayers + " Players");
+        numRoundsField.setText(numRounds + "Rounds left");
+        pointLimitField.setText(pointLimit + "Point limit");
         
         label.add(numPlayersField, numRoundsField, pointLimitField);
     	
