@@ -2,42 +2,56 @@ package com.example.application.views.list;
 
 import com.example.application.data.entity.Player;
 import com.example.application.data.service.CrmService;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import java.util.Random;
+
+
 
 @Route(value = "/game")
 @PageTitle("Game | Maexchen")
+
 public class GameView extends HorizontalLayout { 
     Grid<Player> grid = new Grid<>(Player.class); 
     TextField filterText = new TextField();
     //TextField labelScoreboard = new TextField("Scoreboard");
     Label labelScoreboard = new Label("Scoreboard");
-    TextField numPlayersField = new TextField();
-    TextField numRoundsField = new TextField();
-    TextField pointLimitField = new TextField();
+    Label numPlayersField = new Label();
+    Label numRoundsField = new Label();
+    Label pointLimitField = new Label();
     
-    Integer numPlayers = 0;
+    Integer numPlayers;
     Integer numRounds;
     Integer pointLimit;
     
     CrmService service;
+    Integer zufallszahl; 
+    
+	HorizontalLayout dicesAndScore = new HorizontalLayout();
+
     
 
     public GameView(){
         addClassName("game-view");
         setSizeFull();
         configureGrid();
-        
+        //this.getElement().getStyle().set("background-image","url('images/tisch.jpg')");
+        configFields();
         add(getScoreboard(), configGameScreen());
     }
+    
     
     //Das macht die Tabelle an sich
     private HorizontalLayout getScores() {
@@ -63,7 +77,6 @@ public class GameView extends HorizontalLayout {
     
     //Hier kann man die Variablen dann setzen
     private void configFields() {
-        //Damit kein Fehler kommt, wenn die Tabelle leer ist
     	try{
     		numPlayers = (int) service.countplayer();
     	}
@@ -73,16 +86,16 @@ public class GameView extends HorizontalLayout {
     }
     
     
+    
     //Das macht die Informationen unten, das muss noch angepasst werden, damit eben nicht alles immer angezeigt wird sondenr nur abhängig des GameModes
     private VerticalLayout getLabel() {
     	VerticalLayout label = new VerticalLayout();
     	
     	numPlayersField.setText(numPlayers + " Players");
-        numRoundsField.setText(numRounds + "Rounds left");
-        pointLimitField.setText(pointLimit + "Point limit");
-        
-        label.add(numPlayersField, numRoundsField, pointLimitField);
-    	
+        numRoundsField.setText(numRounds + " Rounds left");
+        pointLimitField.setText(pointLimit + " Point limit");
+  
+        label.add(numPlayersField, numRoundsField, pointLimitField);  	
     	return label;
     }
     
@@ -93,13 +106,7 @@ public class GameView extends HorizontalLayout {
     	return scoreboard;
     }
     
-    //Hier muss das Spiel an sich konfiguriert werden also der Screen, man sollte evtl ein schärferes Bild nehmen aber worst case mäßig gehts
-    private Image configGameScreen() {
-    	Image img = new Image("images/tisch.jpg","Tisch");
-        img.setSizeFull();
-        return img;
-    }
-    
+    ///Falls keine Datenbank dann das hier ändern:
     //Tabelle wird hier erstellt also die Tabellen
     private void configureGrid() {
         grid.addClassNames("player-grid");
@@ -112,6 +119,89 @@ public class GameView extends HorizontalLayout {
         grid.setItems(service.findAllPlayers(filterText.getValue()));
     }
     
+    
+    
+    ////Wird grade bearbeitet
+    //Hier wird das Bild geholt für den Tisch
+    private Image tableimage() {
+    	Image img = new Image("images/tisch.jpg","Tisch");
+    	img.setSizeFull();
+        return img;
+    }
+    
+    //Hier wird der GameScreen konfiguriert, grade nur das Bild
+    private VerticalLayout configGameScreen() {
+    	
+    	VerticalLayout table = new VerticalLayout();
+    	table.add(tableimage());
+    	table.add(buttonDice());
+    	table.setSizeFull();
+        return table;
+    }
+    
+    
+    //Erzeugt den Knopf für das Würfeln   --> hier können dann noch glauben/nicht glauebn und so hhin
+    private HorizontalLayout buttonDice() {
+    	HorizontalLayout dices = new HorizontalLayout();
+    	
+    	Icon dice = new Icon(VaadinIcon.GAMEPAD);
+    	Button rollDiceB = new Button("Roll the dices...", dice);
+    	rollDiceB.addClickListener(rollDices ->
+		dices.add(configDicesAndScore()));
+    	
+    	dices.add(rollDiceB);
+
+    	
+    	return dices;
+    }
+    
+    private HorizontalLayout configDicesAndScore() {
+    	dicesAndScore.add(photo(), submitScoreF());
+    	return dicesAndScore;
+    }
+    
+    
+    private HorizontalLayout submitScoreF () {
+
+    	HorizontalLayout ownScore = new HorizontalLayout();
+    	NumberField myScore = new NumberField("Enter score..");
+    	Button enterScoreB = new Button("Submit");
+    	    	
+    	enterScoreB.addClickListener(scoreSubmitted ->
+    			dicesAndScore.removeAll());
+    	
+    	ownScore.add(myScore, enterScoreB);
+    	return ownScore;	
+    }
+    
+    
+    //Hier wird das Würfelnummerbild zufallig ausgewählt
+    private HorizontalLayout photo() {
+    	HorizontalLayout wuerfel = new HorizontalLayout();
+    	zufallszahl();
+    	
+    	Image photo1 = new Image("images/wuerfel"+zufallszahl+".png", ""+zufallszahl+"");
+    	photo1.setHeight("40px");
+    	photo1.setWidth("40px");
+    	
+    	zufallszahl();
+    	Image photo2 = new Image("images/wuerfel"+zufallszahl+".png", ""+zufallszahl+"");
+    	photo2.setHeight("40px");
+    	photo2.setWidth("40px");
+    	
+    	wuerfel.add(photo1, photo2);
+    	return wuerfel;
+    }
+    
+    //Erzeugt eine 0 <Zufallsnummer <= 6, um ein Bild (würfel) zufällig auszusuchen
+    private Integer zufallszahl() {
+    	int min = 1;
+		int max = 6;
+
+		Random random = new Random();
+
+		zufallszahl = random.nextInt(max + min) + min;
+    	return zufallszahl;
+    }
+
 }
-
-
