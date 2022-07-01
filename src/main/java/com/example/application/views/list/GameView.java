@@ -110,7 +110,7 @@ public class GameView extends HorizontalLayout {
     //Tabelle wird hier erstellt also die Tabellen
     private void configureGrid() {
         grid.addClassNames("player-grid");
-        grid.setColumns("name", "score", "status"); 
+        grid.setColumns("name", "lifes", "status"); 
         grid.getColumns().forEach(col -> col.setAutoWidth(true)); 
     }
  
