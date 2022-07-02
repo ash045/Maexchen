@@ -232,7 +232,7 @@ public class GameView extends HorizontalLayout {
 
 		Random random = new Random();
 
-		zufallszahl = random.nextInt(max - min) + min;
+		zufallszahl = random.nextInt(max) + min;
     	return zufallszahl;
     }
 
