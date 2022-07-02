@@ -64,21 +64,20 @@ public class GameView extends HorizontalLayout {
         return scores;
     }
     
-    //Das macht die Filterung "und den Add Button"
+    //Das macht die Filterung und den Add Button
     private HorizontalLayout getToolbar() {
-        filterText.setPlaceholder("Filter by name...");
+        HorizontalLayout toolbar = new HorizontalLayout();
+
+        filterText.setPlaceholder("Filter by name...");          //Filter
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY); 
         filterText.addValueChangeListener(e -> updateList()); 
         
-        HorizontalLayout toolbar = new HorizontalLayout();
-        
         toolbar.addClassName("toolbar");
         toolbar.add(filterText);
 
-        Button addPlayerButton = new Button("Add Player");
+        Button addPlayerButton = new Button("Add Player");              //Button
         toolbar.add(addPlayerButton);
-
 
         return toolbar;
     }
