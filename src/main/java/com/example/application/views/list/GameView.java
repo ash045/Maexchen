@@ -68,7 +68,7 @@ public class GameView extends HorizontalLayout {
     }
 
 
-    //Das macht die komplette linke Seite
+    //Das macht die Tabelle
     private HorizontalLayout getScores() {
         HorizontalLayout scores = new HorizontalLayout(grid);
         scores.addClassNames("scoreboard");
