@@ -56,8 +56,20 @@ public class GameView extends HorizontalLayout {
         //this.getElement().getStyle().set("background-image","url('images/tisch.jpg')");
         configFields();
         add(getScoreboard(), configGameScreen());
-        Player TestFelix = new Player("Felix");
-        Playerlist.add(TestFelix);
+        Player TestPlayer = new Player("Test");
+        Playerlist.add(TestPlayer);
+        Player p1 = new Player("Test2");
+        Playerlist.add(p1);
+        Player p2 = new Player("Test3");
+        Playerlist.add(p2);
+        Player p3 = new Player("Test4");
+        Playerlist.add(p3);
+        Player p4 = new Player("Test5");
+        Playerlist.add(p4);
+        Player p5 = new Player("Test6");
+        Playerlist.add(p5);
+        Player p6 = new Player("Test7");
+        Playerlist.add(p6);
 
         updateScores();
     }
