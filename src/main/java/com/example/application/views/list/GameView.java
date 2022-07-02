@@ -16,6 +16,8 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.websocket.Decoder.Text;
@@ -37,6 +39,8 @@ public class GameView extends HorizontalLayout {
     Integer numPlayers;
     Integer numRounds;
     Integer pointLimit;
+    List Playerlist = new ArrayList<>();
+    
     
     CrmService service;
     Integer zufallszahl; 
@@ -52,14 +56,23 @@ public class GameView extends HorizontalLayout {
         //this.getElement().getStyle().set("background-image","url('images/tisch.jpg')");
         configFields();
         add(getScoreboard(), configGameScreen());
+        Player TestFelix = new Player("Felix");
+        Playerlist.add(TestFelix);
+
+        updateScores();
     }
     
     
+    private void updateScores() {
+        grid.setItems(Playerlist);
+    }
+
+
     //Das macht die komplette linke Seite
     private HorizontalLayout getScores() {
         HorizontalLayout scores = new HorizontalLayout(grid);
         scores.addClassNames("scoreboard");
-        scores.setWidth("auto");  //will "auto" nur mal ausprobieren ansonsten sieht 40% bei mir gut aus
+        scores.setWidth("40%");  //will "auto" nur mal ausprobieren ansonsten sieht 40% bei mir gut aus
         scores.setHeightFull();
         return scores;
     }

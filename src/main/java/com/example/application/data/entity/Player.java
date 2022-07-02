@@ -6,8 +6,13 @@ import javax.persistence.Entity;
 public class Player extends AbstractEntity {
 
     private String name;
-    private Integer score = 0;
+    private Integer score = 3;
     private String status;
+
+    public Player(String name){
+        this.name= name;
+        this.status = "alive";
+    }
 
     public String getName() {
         return name;
