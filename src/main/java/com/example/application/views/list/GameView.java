@@ -58,17 +58,17 @@ public class GameView extends HorizontalLayout {
         add(getScoreboard(), configGameScreen());
         Player TestPlayer = new Player("Test");
         Playerlist.add(TestPlayer);
-        Player p1 = new Player("Test2");
+        Player p1 = new Player("Test1");
         Playerlist.add(p1);
-        Player p2 = new Player("Test3");
+        Player p2 = new Player("Test2");
         Playerlist.add(p2);
-        Player p3 = new Player("Test4");
+        Player p3 = new Player("Test3");
         Playerlist.add(p3);
-        Player p4 = new Player("Test5");
+        Player p4 = new Player("Test4");
         Playerlist.add(p4);
-        Player p5 = new Player("Test6");
+        Player p5 = new Player("Test5");
         Playerlist.add(p5);
-        Player p6 = new Player("Test7");
+        Player p6 = new Player("Test6");
         Playerlist.add(p6);
 
         updateScores();
@@ -177,11 +177,11 @@ public class GameView extends HorizontalLayout {
     	HorizontalLayout dices = new HorizontalLayout();
     	
     	Icon dice = new Icon(VaadinIcon.GAMEPAD);
-    	Button rollDiceB = new Button("Roll the dices...", dice);
-    	rollDiceB.addClickListener(rollDices ->
+    	Button rollDiceButton = new Button("Roll the dices...", dice);
+    	rollDiceButton.addClickListener(rollDices ->
 		dices.add(configDicesAndScore()));
     	
-    	dices.add(rollDiceB);
+    	dices.add(rollDiceButton);
 
     	
     	return dices;
@@ -232,7 +232,7 @@ public class GameView extends HorizontalLayout {
 
 		Random random = new Random();
 
-		zufallszahl = random.nextInt(max + min) + min;
+		zufallszahl = random.nextInt(max - min) + min;
     	return zufallszahl;
     }
 
