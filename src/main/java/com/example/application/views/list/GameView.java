@@ -18,6 +18,8 @@ import com.vaadin.flow.router.Route;
 
 import java.util.Random;
 
+import javax.websocket.Decoder.Text;
+
 
 
 @Route(value = "/game")
@@ -53,25 +55,31 @@ public class GameView extends HorizontalLayout {
     }
     
     
-    //Das macht die Tabelle an sich
+    //Das macht die komplette linke Seite
     private HorizontalLayout getScores() {
         HorizontalLayout scores = new HorizontalLayout(grid);
         scores.addClassNames("scoreboard");
-        scores.setWidth("200px");
+        scores.setWidth("auto");  //will "auto" nur mal ausprobieren ansonsten sieht 40% bei mir gut aus
         scores.setHeightFull();
         return scores;
     }
     
-    //Das macht die Filterung
+    //Das macht die Filterung "und den Add Button"
     private HorizontalLayout getToolbar() {
         filterText.setPlaceholder("Filter by name...");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY); 
         filterText.addValueChangeListener(e -> updateList()); 
         
-        HorizontalLayout toolbar = new HorizontalLayout(filterText);
+        HorizontalLayout toolbar = new HorizontalLayout();
         
         toolbar.addClassName("toolbar");
+        toolbar.add(filterText);
+
+        Button addPlayerButton = new Button("Add Player");
+        toolbar.add(addPlayerButton);
+
+
         return toolbar;
     }
     
