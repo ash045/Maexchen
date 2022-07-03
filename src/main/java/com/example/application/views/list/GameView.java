@@ -41,7 +41,9 @@ public class GameView extends HorizontalLayout {
     Integer pointLimit;
     List Playerlist = new ArrayList<>();
     double myScore = 0;
-    double zufallszahlVar = 0;
+    Integer zufallszahlVar1 = 0;
+    Integer zufallszahlVar2 = 0;
+
     int CurrentPlayer =0;
     
     CrmService service;
@@ -225,16 +227,18 @@ public class GameView extends HorizontalLayout {
     private HorizontalLayout photo() {
     	HorizontalLayout wuerfel = new HorizontalLayout();
     	zufallszahl();
-    	
+    	zufallszahlVar1 = zufallszahl;
     	Image photo1 = new Image("images/wuerfel"+zufallszahl+".png", ""+zufallszahl+"");
     	photo1.setHeight("40px");
     	photo1.setWidth("40px");
     	
     	zufallszahl();
+        zufallszahlVar2 = zufallszahl;
     	Image photo2 = new Image("images/wuerfel"+zufallszahl+".png", ""+zufallszahl+"");
     	photo2.setHeight("40px");
     	photo2.setWidth("40px");
     	
+        ((Player) Playerlist.get(CurrentPlayer)).setRandomscore(translateZufallszahl(zufallszahlVar1, zufallszahlVar2));
     	wuerfel.add(photo1, photo2);
     	return wuerfel;
     }
@@ -247,13 +251,12 @@ public class GameView extends HorizontalLayout {
 		Random random = new Random();
 
 		zufallszahl = random.nextInt(max) + min;
-        zufallszahlVar = zufallszahl;
     	return zufallszahl;
     }
 
     public double scoreRechnungClassic() {
         //if doubt gedrückt
-        if (myScore != zufallszahlVar) {
+        if (myScore != ((Player) Playerlist.get(CurrentPlayer)).getRandomscore()) {
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
         }
         else{
@@ -267,6 +270,99 @@ public class GameView extends HorizontalLayout {
         else{
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
         }
+    }
+
+    private Integer translateZufallszahl(Integer z1, Integer z2){
+        Integer zufallsScore = 0;
+        if (z1>z2){
+            if (z1 == 3){
+                if (z2 == 1 ){
+                    zufallsScore = 0;
+                } else {
+                    zufallsScore = 1;
+                }
+            } else if (z1 == 4 ){
+                if (z2 == 1){
+                    zufallsScore = 2;
+                } else if (z2 == 2) {
+                    zufallsScore = 3;
+                } else {
+                    zufallsScore = 4;
+                }
+            } else if (z1 == 5){
+                if (z2 == 1 ){
+                    zufallsScore = 5;
+                } else if (z2 == 2) {
+                    zufallsScore = 6;
+                } else if (z2 == 3) {
+                    zufallsScore = 7;
+                } else {
+                    zufallsScore = 8;
+                }
+            } else if (z1 == 6) {
+                if (z2 == 1 ){
+                    zufallsScore = 9;
+                } else if (z2 == 2) {
+                    zufallsScore = 10;
+                } else if (z2 == 3) {
+                    zufallsScore = 11;
+                } else if(z2 ==4) {
+                    zufallsScore = 12;
+                } else {
+                    zufallsScore = 13;
+                }
+            } else {
+                zufallsScore = 20;
+            }
+        } else if (z2>z1){
+            int temp = 0;
+            temp = z1;
+            z1 = z2;
+            z2 = temp;
+            if (z1 == 3){
+                if (z2 == 1 ){
+                    zufallsScore = 0;
+                } else {
+                    zufallsScore = 1;
+                }
+            } else if (z1 == 4 ){
+                if (z2 == 1){
+                    zufallsScore = 2;
+                } else if (z2 == 2) {
+                    zufallsScore = 3;
+                } else {
+                    zufallsScore = 4;
+                }
+            } else if (z1 == 5){
+                if (z2 == 1 ){
+                    zufallsScore = 5;
+                } else if (z2 == 2) {
+                    zufallsScore = 6;
+                } else if (z2 == 3) {
+                    zufallsScore = 7;
+                } else {
+                    zufallsScore = 8;
+                }
+            } else if (z1 == 6) {
+                if (z2 == 1 ){
+                    zufallsScore = 9;
+                } else if (z2 == 2) {
+                    zufallsScore = 10;
+                } else if (z2 == 3) {
+                    zufallsScore = 11;
+                } else if(z2 ==4) {
+                    zufallsScore = 12;
+                } else {
+                    zufallsScore = 13;
+                }
+            } else {
+                zufallsScore = 20;
+            }
+
+        } else {
+            zufallsScore = z1 + 13;
+        }
+        return zufallsScore;
     }
 
 }
