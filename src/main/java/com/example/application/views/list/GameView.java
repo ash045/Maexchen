@@ -198,7 +198,7 @@ public class GameView extends HorizontalLayout {
     	VerticalLayout table = new VerticalLayout();
     	//table.add(tableimage());
     	table.add(buttonDice());
-        table.add(trustButton());
+        //table.add(trustButton());
         table.add(doubtButton());
         
     	table.setSizeFull();
@@ -207,18 +207,27 @@ public class GameView extends HorizontalLayout {
     
     
     //Erzeugt den Knopf für das Würfeln   --> hier können dann noch glauben/nicht glauebn und so hhin
-    public HorizontalLayout buttonDice() {
+    private HorizontalLayout buttonDice() {
     	HorizontalLayout dices = new HorizontalLayout();
     	
     	Icon dice = new Icon(VaadinIcon.GAMEPAD);
     	Button rollDiceButton = new Button("Roll the dice...", dice);
-        rollDiceButton.addClickListener(rollDices -> dices.add(configDicesAndScore()));
+    	rollDiceButton.addClickListener(rollDices ->
+		dices.add(configDicesAndScore()));
     	
     	dices.add(rollDiceButton);
 
     	
     	return dices;
     }
+
+    private HorizontalLayout DiceTrust() {
+    	HorizontalLayout TrustDice = new HorizontalLayout();
+        TrustDice.removeAll();
+		TrustDice.add(configDicesAndScore());
+    	return TrustDice;
+    }
+
 
     private HorizontalLayout configDicesAndScore() {
     	
@@ -236,10 +245,16 @@ public class GameView extends HorizontalLayout {
 
     public void submitButtonFunctionality(){
         Double temp = myScoreField.getValue();
-        int temp2 = temp.intValue();
+        temp2 = temp.intValue();
     	((Player) Playerlist.get(CurrentPlayer)).setEnteredscore(translateEnteredzahl(temp2)); 
         myScoreField.clear();
         dicesAndScore.removeAll();
+
+        if (CurrentPlayer<Playerlist.size()-1){
+            CurrentPlayer = CurrentPlayer+1;
+        }else{
+            CurrentPlayer=0;
+        }
         showCurrentPlayer();
         
     }
@@ -284,23 +299,37 @@ public class GameView extends HorizontalLayout {
 
     public void scoreRechnungDoubt() {
         //if doubt gedrückt
-        if (translateEnteredzahl(temp2) != ((Player) Playerlist.get(CurrentPlayer)).getRandomscore()) {
-            ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
+        Integer PreviousPlayer = 0;
+        if (CurrentPlayer == 0){
+            PreviousPlayer = Playerlist.size()-1;
+        } else {
+            PreviousPlayer = CurrentPlayer-1;
+        }
+        if (translateEnteredzahl(temp2) != ((Player) Playerlist.get(PreviousPlayer)).getRandomscore()) {
+            ((Player) Playerlist.get(PreviousPlayer)).setScore(((Player) Playerlist.get(PreviousPlayer)).getScore()-1);
+            
+            if (((Player) Playerlist.get(PreviousPlayer)).getScore()==0){
+                Playerlist.remove(PreviousPlayer);
+            }
             updateScores();
-            CurrentPlayer = CurrentPlayer + 1;
         }
         else{
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
+            if (((Player) Playerlist.get(CurrentPlayer)).getScore()==0){
+                Playerlist.remove(CurrentPlayer);
+                if (CurrentPlayer == Playerlist.size()){
+                    CurrentPlayer=0;
+                }
+            }
             updateScores();
-            CurrentPlayer = CurrentPlayer + 1;
         }
     }
 
     public void scoreRechnungTrust(){
         // if trust gedrückt
-        configDicesAndScore();
-        if ((translateEnteredzahl(((Player) Playerlist.get(CurrentPlayer)).getEnteredscore())) > ((Player) Playerlist.get(CurrentPlayer+1)).getRandomscore()) {
-            ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore());
+        DiceTrust();
+        if (((Player) Playerlist.get(CurrentPlayer)).getEnteredscore() > ((Player) Playerlist.get(CurrentPlayer+1)).getRandomscore()) {
+            ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
             updateScores();
             CurrentPlayer = CurrentPlayer + 1;
             
