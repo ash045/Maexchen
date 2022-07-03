@@ -29,7 +29,7 @@ import javax.websocket.Decoder.Text;
 
 public class GameView extends HorizontalLayout { 
     Grid<Player> grid = new Grid<>(Player.class); 
-    TextField filterText = new TextField();
+    TextField newPlayerName = new TextField();
     //TextField labelScoreboard = new TextField("Scoreboard");
     Label labelScoreboard = new Label("Scoreboard");
     Label numPlayersField = new Label();
@@ -72,6 +72,7 @@ public class GameView extends HorizontalLayout {
         Playerlist.add(p6);
 
         updateScores();
+        updateLabel();
     }
     
     
@@ -93,18 +94,27 @@ public class GameView extends HorizontalLayout {
     private HorizontalLayout getToolbar() {
         HorizontalLayout toolbar = new HorizontalLayout();
 
-        filterText.setPlaceholder("Filter by name...");          //Filter
-        filterText.setClearButtonVisible(true);
-        filterText.setValueChangeMode(ValueChangeMode.LAZY); 
-        filterText.addValueChangeListener(e -> updateList()); 
+        newPlayerName.setPlaceholder("Add Player...");          //Filter
+        newPlayerName.setClearButtonVisible(true);
+        newPlayerName.setValueChangeMode(ValueChangeMode.LAZY); 
         
         toolbar.addClassName("toolbar");
-        toolbar.add(filterText);
+        toolbar.add(newPlayerName);
 
-        Button addPlayerButton = new Button("Add Player");              //Button
+        Button addPlayerButton = new Button("Add Player");  
+        addPlayerButton.addClickListener(event -> updatePlayerlist());            //Button
         toolbar.add(addPlayerButton);
 
         return toolbar;
+    }
+
+    private void updatePlayerlist(){
+        Player newPlayer = new Player(newPlayerName.getValue());
+        System.out.println(newPlayerName.getValue());
+
+        Playerlist.add(newPlayer);
+        updateScores();
+        updateLabel();
     }
     
     //Hier kann man die Variablen dann setzen
@@ -123,13 +133,22 @@ public class GameView extends HorizontalLayout {
     private VerticalLayout getLabel() {
     	VerticalLayout label = new VerticalLayout();
     	
-    	numPlayersField.setText(numPlayers + " Players");
+    	numPlayersField.setText(Playerlist.size() + " Players");
         numRoundsField.setText(numRounds + " Rounds left");
         pointLimitField.setText(pointLimit + " Point limit");
   
         label.add(numPlayersField, numRoundsField, pointLimitField);  	
     	return label;
     }
+
+    private void updateLabel() {
+    	
+    	numPlayersField.setText(Playerlist.size() + " Players");
+        numRoundsField.setText(numRounds + " Rounds left");
+        pointLimitField.setText(pointLimit + " Point limit");
+
+    }
+
     
     //Das macht die gesamte Seitenleiste (Filter+Tabelle)
     private VerticalLayout getScoreboard() {
@@ -144,14 +163,7 @@ public class GameView extends HorizontalLayout {
         grid.addClassNames("player-grid");
         grid.setColumns("name", "score", "status"); 
         grid.getColumns().forEach(col -> col.setAutoWidth(true)); 
-    }
- 
-    //Filter für wenn man ganz viele Namen hat    
-    private void updateList() { 
-        grid.setItems(service.findAllPlayers(filterText.getValue()));
-    }
-    
-    
+    } 
     
     ////Wird grade bearbeitet
     //Hier wird das Bild geholt für den Tisch
