@@ -228,7 +228,7 @@ public class GameView extends HorizontalLayout {
     	((Player) Playerlist.get(CurrentPlayer)).setEnteredscore(translateEnteredzahl(temp2)); 
         myScoreField.clear();
         dicesAndScore.removeAll();
-        CurrentPlayer = CurrentPlayer + 1;
+        
     }
 
     //Hier wird das Würfelnummerbild zufallig ausgewählt
@@ -267,10 +267,12 @@ public class GameView extends HorizontalLayout {
         if (translateEnteredzahl(temp2) != ((Player) Playerlist.get(CurrentPlayer)).getRandomscore()) {
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
             updateScores();
+            CurrentPlayer = CurrentPlayer + 1;
         }
         else{
             ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
             updateScores();
+            CurrentPlayer = CurrentPlayer + 1;
         }
     }
     public void scoreRechnungTrust(){
@@ -280,12 +282,14 @@ public class GameView extends HorizontalLayout {
             ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
             updateScores();
             getScores();
+            CurrentPlayer = CurrentPlayer + 1;
             
         }
         else{
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
             updateScores();
             getScores();
+            CurrentPlayer = CurrentPlayer + 1;
             
         }
     }
