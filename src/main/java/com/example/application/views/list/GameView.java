@@ -223,7 +223,7 @@ public class GameView extends HorizontalLayout {
     public void submitButtonFunctionality(){
         Double temp = myScoreField.getValue();
         int temp2 = temp.intValue();
-    	((Player) Playerlist.get(CurrentPlayer)).setEnteredscore(temp2); 
+    	((Player) Playerlist.get(CurrentPlayer)).setEnteredscore(translateEnteredzahl(temp2)); 
         dicesAndScore.removeAll(); 
     }
 
@@ -368,5 +368,71 @@ public class GameView extends HorizontalLayout {
         }
         return zufallsScore;
     }
-
+    private Integer translateEnteredzahl(int temp2){
+        Integer enteredScore = 0;
+            if (temp2 == 31){
+                    enteredScore = 0;
+                }
+            else if (temp2 == 32){
+                    enteredScore = 1;
+                } 
+            else if (temp2 == 41) {
+                    enteredScore = 2;
+            }
+            else if (temp2 == 42){
+                    enteredScore = 3;
+                } 
+            else if (temp2 == 43){
+                    enteredScore = 4;
+                } 
+            else if (temp2 == 51) {
+                    enteredScore = 5;
+            }
+            else if (temp2 == 52){
+                    enteredScore = 6;
+                    } 
+            else if (temp2 == 53) {
+                    enteredScore = 7;
+                }
+            else if (temp2 == 54){
+                    enteredScore = 8;
+                    } 
+            else if (temp2 == 61) {
+                    enteredScore = 9;
+                    }
+            else if (temp2 == 62){
+                    enteredScore = 10;
+                    } 
+            else if (temp2 == 63) {
+                    enteredScore = 11;
+                    }
+            else if (temp2 == 64){
+                    enteredScore = 12;
+                    } 
+            else if (temp2 == 65) {
+                    enteredScore = 13;
+                    }
+            else if (temp2 == 11){
+                    enteredScore = 14;
+                    } 
+            else if (temp2 == 22) {
+                    enteredScore = 15;
+                    }
+            else if (temp2 == 33){
+                    enteredScore = 16;
+                    } 
+            else if (temp2 == 44) {
+                     enteredScore = 17;
+                    }
+            else if (temp2 == 55){
+                    enteredScore = 18;
+                    } 
+            else if (temp2 == 66) {
+                    enteredScore = 19;
+                    }
+            else if (temp2 == 21) {
+                        enteredScore = 20;
+                        }
+        return enteredScore;
+}
 }
