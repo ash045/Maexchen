@@ -6,8 +6,11 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
@@ -196,6 +199,7 @@ public class GameView extends HorizontalLayout {
     	//table.add(tableimage());
     	table.add(buttonDice());
         table.add(trustButtons());
+        
     	table.setSizeFull();
         return table;
     }
@@ -242,8 +246,17 @@ public class GameView extends HorizontalLayout {
     	((Player) Playerlist.get(CurrentPlayer)).setEnteredscore(translateEnteredzahl(temp2)); 
         myScoreField.clear();
         dicesAndScore.removeAll();
+        CurrentPlayer = CurrentPlayer + 1;
+        showCurrentPlayer();
         
     }
+
+    private void showCurrentPlayer(){
+        String curr = ((Player) Playerlist.get(CurrentPlayer)).getName();
+        Notification notification = Notification.show("Its " + curr + "'s turn");
+        notification.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
+    }
+     
 
     //Hier wird das Würfelnummerbild zufallig ausgewählt
     private HorizontalLayout photo() {
