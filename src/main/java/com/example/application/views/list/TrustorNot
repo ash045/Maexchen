@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class TrustorNot{
+ 
+ public static void main(String[] args) throws InterruptedException{
+  
+  
+   Scanner YesNo = new Scanner(System.in);
+   
+   System.out.println("Do you have a brother? ");
+   String yesno = YesNo.next();
+      
+   
+   if(yesno.equals("yes")) {
+    
+    //Logik muss rein 
+    ;
+    
+   }
+   else if(yesno.equals("no")) {
+    
+   //logik muss rein
+   ;
+    
+   }
+   
+   
+  
+  
+ }
+  
+ 
+}
