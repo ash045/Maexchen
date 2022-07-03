@@ -83,6 +83,17 @@ public class GameView extends HorizontalLayout {
         updateScores();
         updateLabel();
     }
+
+    private HorizontalLayout trustButtons(){
+        HorizontalLayout trust = new HorizontalLayout();
+        Button trustbutton = new Button("Trust");
+        Button doubtbutton = new Button("Doubt");
+        trust.add(trustbutton);
+        trust.add(doubtbutton);
+
+        return trust;
+        
+    }
     
     
     private void updateScores() {
@@ -188,6 +199,7 @@ public class GameView extends HorizontalLayout {
     	VerticalLayout table = new VerticalLayout();
     	//table.add(tableimage());
     	table.add(buttonDice());
+        table.add(trustButtons());
     	table.setSizeFull();
         return table;
     }
