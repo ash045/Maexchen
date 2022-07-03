@@ -7,7 +7,7 @@ public class TrustorNot{
   
    Scanner YesNo = new Scanner(System.in);
    
-   System.out.println("Do you have a brother? ");
+   System.out.println("Do you trust the score? ");
    String yesno = YesNo.next();
       
    
