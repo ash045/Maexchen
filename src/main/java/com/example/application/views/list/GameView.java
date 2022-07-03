@@ -210,10 +210,10 @@ public class GameView extends HorizontalLayout {
     }
 
     private HorizontalLayout DiceTrust() {
-    	HorizontalLayout dices = new HorizontalLayout();
+    	HorizontalLayout TrustDice = new HorizontalLayout();
     	Icon dice = new Icon(VaadinIcon.GAMEPAD);
-		dices.add(configDicesAndScore());
-    	return dices;
+		TrustDice.add(configDicesAndScore());
+    	return TrustDice;
     }
     
     private HorizontalLayout configDicesAndScore() {
@@ -285,7 +285,7 @@ public class GameView extends HorizontalLayout {
 
     public void scoreRechnungTrust(){
         // if trust gedrückt
-        DiceTrust();
+        photo();
         if (((Player) Playerlist.get(CurrentPlayer)).getEnteredscore() > ((Player) Playerlist.get(CurrentPlayer+1)).getRandomscore()) {
             ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
             updateScores();
