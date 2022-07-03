@@ -30,6 +30,9 @@ import javax.websocket.Decoder.Text;
 public class GameView extends HorizontalLayout { 
     Grid<Player> grid = new Grid<>(Player.class); 
     TextField newPlayerName = new TextField();
+    HorizontalLayout ownScore = new HorizontalLayout();
+    NumberField myScoreField = new NumberField("Enter score..");
+    Button enterScoreB = new Button("Submit");  
     //TextField labelScoreboard = new TextField("Scoreboard");
     Label labelScoreboard = new Label("Scoreboard");
     Label numPlayersField = new Label();
@@ -211,18 +214,19 @@ public class GameView extends HorizontalLayout {
     
     public HorizontalLayout submitScoreF () {
 
-    	HorizontalLayout ownScore = new HorizontalLayout();
-    	NumberField myScoreField = new NumberField("Enter score..");
-    	Button enterScoreB = new Button("Submit");
-    	Playerlist(i).setEnteredScore = myScoreField.getValue();    	
-    	enterScoreB.addClickListener(scoreSubmitted ->
-    			dicesAndScore.removeAll());
+    	enterScoreB.addClickListener(scoreSubmitted -> submitButtonFunctionality());
     	
     	ownScore.add(myScoreField, enterScoreB);
     	return ownScore;	
     }
-    
-    
+
+    public void submitButtonFunctionality(){
+        Double temp = myScoreField.getValue();
+        int temp2 = temp.intValue();
+    	((Player) Playerlist.get(CurrentPlayer)).setEnteredscore(temp2); 
+        dicesAndScore.removeAll(); 
+    }
+
     //Hier wird das Würfelnummerbild zufallig ausgewählt
     private HorizontalLayout photo() {
     	HorizontalLayout wuerfel = new HorizontalLayout();
