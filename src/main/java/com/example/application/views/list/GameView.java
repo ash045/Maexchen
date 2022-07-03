@@ -74,7 +74,7 @@ public class GameView extends HorizontalLayout {
         updateLabel();
     }
 
-    private HorizontalLayout trustButtons(){
+    private HorizontalLayout trustButton(){
         HorizontalLayout trust = new HorizontalLayout();
         Button trustbutton = new Button("Trust");
         trust.add(trustbutton);
@@ -84,7 +84,7 @@ public class GameView extends HorizontalLayout {
         
     }
 
-    private HorizontalLayout doubtButtons(){
+    private HorizontalLayout doubtButton(){
         HorizontalLayout doubt = new HorizontalLayout();
         Button doubtbutton = new Button("Doubt");
         doubt.add(doubtbutton);
@@ -198,7 +198,8 @@ public class GameView extends HorizontalLayout {
     	VerticalLayout table = new VerticalLayout();
     	//table.add(tableimage());
     	table.add(buttonDice());
-        table.add(trustButtons());
+        table.add(trustButton());
+        table.add(doubtButton());
         
     	table.setSizeFull();
         return table;
@@ -222,11 +223,11 @@ public class GameView extends HorizontalLayout {
 
     private HorizontalLayout DiceTrust() {
     	HorizontalLayout TrustDice = new HorizontalLayout();
-    	Icon dice = new Icon(VaadinIcon.GAMEPAD);
 		TrustDice.add(configDicesAndScore());
     	return TrustDice;
     }
-    
+
+
     private HorizontalLayout configDicesAndScore() {
     	dicesAndScore.add(photo(), submitScoreF());
     	return dicesAndScore;
@@ -305,7 +306,7 @@ public class GameView extends HorizontalLayout {
 
     public void scoreRechnungTrust(){
         // if trust gedrückt
-        photo();
+        DiceTrust();
         if (((Player) Playerlist.get(CurrentPlayer)).getEnteredscore() > ((Player) Playerlist.get(CurrentPlayer+1)).getRandomscore()) {
             ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
             updateScores();
