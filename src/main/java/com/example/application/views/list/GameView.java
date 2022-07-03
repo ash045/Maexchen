@@ -16,6 +16,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import antlr.debug.Event;
 import oshi.hardware.CentralProcessor;
 
 import java.util.ArrayList;
@@ -74,7 +75,9 @@ public class GameView extends HorizontalLayout {
         Button trustbutton = new Button("Trust");
         Button doubtbutton = new Button("Doubt");
         trust.add(trustbutton);
+        trustbutton.addClickListener(Event -> scoreRechnungTrust());
         trust.add(doubtbutton);
+        trustbutton.addClickListener(Event -> scoreRechnungDoubt());
 
         return trust;
         
@@ -258,7 +261,7 @@ public class GameView extends HorizontalLayout {
     	return zufallszahl;
     }
 
-    public void scoreRechnungClassic() {
+    public void scoreRechnungDoubt() {
         //if doubt gedrückt
         if (myScore != ((Player) Playerlist.get(CurrentPlayer)).getRandomscore()) {
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
@@ -270,6 +273,8 @@ public class GameView extends HorizontalLayout {
             updateScores();
             nextPlayer();
         }
+    }
+    public void scoreRechnungTrust(){
         // if trust gedrückt
         buttonDice();
         if (((Player) Playerlist.get(CurrentPlayer)).getEnteredscore() > ((Player) Playerlist.get(CurrentPlayer+1)).getRandomscore()) {
