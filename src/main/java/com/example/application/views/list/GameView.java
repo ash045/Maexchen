@@ -74,13 +74,20 @@ public class GameView extends HorizontalLayout {
     private HorizontalLayout trustButtons(){
         HorizontalLayout trust = new HorizontalLayout();
         Button trustbutton = new Button("Trust");
-        Button doubtbutton = new Button("Doubt");
         trust.add(trustbutton);
         trustbutton.addClickListener(click -> scoreRechnungTrust());
-        trust.add(doubtbutton);
-        doubtbutton.addClickListener(click2 -> scoreRechnungDoubt());
 
         return trust;
+        
+    }
+
+    private HorizontalLayout doubtButtons(){
+        HorizontalLayout doubt = new HorizontalLayout();
+        Button doubtbutton = new Button("Doubt");
+        doubt.add(doubtbutton);
+        doubtbutton.addClickListener(click2 -> scoreRechnungDoubt());
+
+        return doubt;
         
     }
     
