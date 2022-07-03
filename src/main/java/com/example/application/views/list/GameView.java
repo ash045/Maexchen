@@ -284,7 +284,7 @@ public class GameView extends HorizontalLayout {
         }
     }
     private void nextPlayer(){
-        CurrentPlayer = CurrentPlayer +1
+        CurrentPlayer = CurrentPlayer +1;
     }
 
     private Integer translateZufallszahl(Integer z1, Integer z2){
