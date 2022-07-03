@@ -8,6 +8,9 @@ public class Player extends AbstractEntity {
     private String name;
     private Integer score = 3;
     private String status;
+    private Double randomscore = 0.0;
+    private Double enteredscore = 0.0;
+
 
     public Player(String name){
         this.name= name;
@@ -36,5 +39,21 @@ public class Player extends AbstractEntity {
     
     public String getStatus() {
     	return status;
+    }
+
+    public void getrandomscore(Double randomscore) {
+    	this.randomscore = randomscore;
+    }
+    
+    public Double getrandomscore() {
+    	return randomscore;
+    }
+
+    public void getenteredscore(Double enteredscore) {
+    	this.enteredscore = enteredscore;
+    }
+    
+    public Double getenteredscore() {
+    	return enteredscore;
     }
 }
