@@ -8,10 +8,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import Response;
 
 @PageTitle("list")
-@Route(value = "")
+@Route(value = "/list")
 public class ListView extends VerticalLayout {
 
     public ListView() {

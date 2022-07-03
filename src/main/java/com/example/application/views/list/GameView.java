@@ -30,7 +30,7 @@ import javax.websocket.Decoder.Text;
 
 
 
-@Route(value = "/game")
+@Route(value = "")
 @PageTitle("Game | Maexchen")
 
 public class GameView extends HorizontalLayout { 
