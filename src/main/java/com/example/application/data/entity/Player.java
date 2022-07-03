@@ -41,19 +41,19 @@ public class Player extends AbstractEntity {
     	return status;
     }
 
-    public void setrandomscore(Double randomscore) {
+    public void setRandomscore(Double randomscore) {
     	this.randomscore = randomscore;
     }
     
-    public Double getrandomscore() {
+    public Double getRandomscore() {
     	return randomscore;
     }
 
-    public void setenteredscore(Double enteredscore) {
+    public void setEnteredscore(Double enteredscore) {
     	this.enteredscore = enteredscore;
     }
     
-    public Double getenteredscore() {
+    public Double getEnteredscore() {
     	return enteredscore;
     }
 }
