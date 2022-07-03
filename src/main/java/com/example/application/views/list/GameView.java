@@ -164,8 +164,8 @@ public class GameView extends HorizontalLayout {
     private void updateLabel() {
     	
     	numPlayersField.setText(Playerlist.size() + " Players");
-        numRoundsField.setText(numRounds + " Rounds left");
-        pointLimitField.setText(pointLimit + " Point limit");
+        //numRoundsField.setText(numRounds + " Rounds left");
+        //pointLimitField.setText(pointLimit + " Point limit");
 
     }
 
