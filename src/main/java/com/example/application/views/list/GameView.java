@@ -54,6 +54,7 @@ public class GameView extends HorizontalLayout {
     Integer zufallszahlVar2 = 0;
 
     int CurrentPlayer =0;
+    int PreviousPlayer =0;
     int temp2 = 0;
     
     CrmService service;
@@ -299,7 +300,6 @@ public class GameView extends HorizontalLayout {
 
     public void scoreRechnungDoubt() {
         //if doubt gedrückt
-        Integer PreviousPlayer = 0;
         if (CurrentPlayer == 0){
             PreviousPlayer = Playerlist.size()-1;
         } else {
@@ -308,15 +308,17 @@ public class GameView extends HorizontalLayout {
         if (translateEnteredzahl(temp2) != ((Player) Playerlist.get(PreviousPlayer)).getRandomscore()) {
             ((Player) Playerlist.get(PreviousPlayer)).setScore(((Player) Playerlist.get(PreviousPlayer)).getScore()-1);
             
-            if (((Player) Playerlist.get(PreviousPlayer)).getScore()==0){
+            if (((Player) Playerlist.get(PreviousPlayer)).getScore() == 0){
                 Playerlist.remove(PreviousPlayer);
             }
             updateScores();
         }
         else{
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
+
             if (((Player) Playerlist.get(CurrentPlayer)).getScore()==0){
                 Playerlist.remove(CurrentPlayer);
+
                 if (CurrentPlayer == Playerlist.size()){
                     CurrentPlayer=0;
                 }
