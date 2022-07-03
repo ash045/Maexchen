@@ -33,7 +33,7 @@ public class Player extends AbstractEntity {
         return score;
     }
     
-    public void getStatus(String status) {
+    public void setStatus(String status) {
     	this.status = status;
     }
     
@@ -41,7 +41,7 @@ public class Player extends AbstractEntity {
     	return status;
     }
 
-    public void getrandomscore(Double randomscore) {
+    public void setrandomscore(Double randomscore) {
     	this.randomscore = randomscore;
     }
     
@@ -49,7 +49,7 @@ public class Player extends AbstractEntity {
     	return randomscore;
     }
 
-    public void getenteredscore(Double enteredscore) {
+    public void setenteredscore(Double enteredscore) {
     	this.enteredscore = enteredscore;
     }
     
