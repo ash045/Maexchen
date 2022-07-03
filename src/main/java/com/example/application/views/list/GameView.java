@@ -177,7 +177,7 @@ public class GameView extends HorizontalLayout {
     	HorizontalLayout dices = new HorizontalLayout();
     	
     	Icon dice = new Icon(VaadinIcon.GAMEPAD);
-    	Button rollDiceButton = new Button("Roll the dices...", dice);
+    	Button rollDiceButton = new Button("Roll the dice...", dice);
     	rollDiceButton.addClickListener(rollDices ->
 		dices.add(configDicesAndScore()));
     	

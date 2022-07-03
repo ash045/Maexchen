@@ -6,20 +6,27 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 import com.example.application.data.entity.Player;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
-import com.example.application.data.entity.Player;
 
 @PageTitle("start")
 @Route(value = "/start")
 public class StartView extends VerticalLayout{
-	Grid<Player> grid = new Grid<>(Player.class);
+	Grid<Player> grid = new Grid<>(Player.class); 
 	TextField addname = new TextField();
+	List Playerlist = new ArrayList<>();
 	
 	StartView(){
 		setSizeFull();
 		buttons();
+		configureGrid();
+		//updateScores();
 	}
 	
 
@@ -56,7 +63,7 @@ public class StartView extends VerticalLayout{
 
 		private void configureGrid() {
 			grid.addClassNames("player-grid");
-			grid.setColumns("name"); 
+			grid.setColumns("name","score","status"); 
 			grid.getColumns().forEach(col -> col.setAutoWidth(true)); 
 		}
 
@@ -71,12 +78,24 @@ public class StartView extends VerticalLayout{
         	toolbar.add(addname);
 			toolbar.addClassName("addname");
 			
-			Button addPlayerButton = new Button("Add Player"); 		// Button muss noch angepasst werden um neue Spieler Objekte zu erzeugen
-			/*addPlayerButton.addClickListener(e -> Player(addname.getValue()));
+			Button addPlayerButton = new Button("Add Player"); 		// Button muss noch angepasst werden um neue Spieler zu erzeugen
+			addPlayerButton.addClickListener(event -> updatePlayerlist());
 			//addPlayerButton.getUI().ifPresent(ui -> ui.navigate("/game")));       */      
 			toolbar.add(addPlayerButton);
-	
+			
 			return toolbar;
+		}
+
+		private void updatePlayerlist(){
+			Player newPlayer = new Player(addname.getValue());
+			System.out.println(addname.getValue());
+
+			Playerlist.add(newPlayer);
+			updateScores();
+		}
+
+		private void updateScores() {
+			grid.setItems(Playerlist);
 		}
 
 		private HorizontalLayout getScores() {
