@@ -223,13 +223,15 @@ public class GameView extends HorizontalLayout {
 
     private HorizontalLayout DiceTrust() {
     	HorizontalLayout TrustDice = new HorizontalLayout();
+        TrustDice.removeAll();
 		TrustDice.add(configDicesAndScore());
     	return TrustDice;
     }
 
 
     private HorizontalLayout configDicesAndScore() {
-    	dicesAndScore.add(photo(), submitScoreF());
+    	
+        dicesAndScore.add(photo(), submitScoreF());
     	return dicesAndScore;
     }
     
