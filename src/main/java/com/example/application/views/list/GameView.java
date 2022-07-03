@@ -282,16 +282,13 @@ public class GameView extends HorizontalLayout {
         if (((Player) Playerlist.get(CurrentPlayer)).getEnteredscore() > ((Player) Playerlist.get(CurrentPlayer+1)).getRandomscore()) {
             ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
             updateScores();
-            getScores();
             CurrentPlayer = CurrentPlayer + 1;
             
         }
         else{
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
             updateScores();
-            getScores();
             CurrentPlayer = CurrentPlayer + 1;
-            
         }
     }
 
