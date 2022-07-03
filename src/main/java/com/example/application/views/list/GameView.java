@@ -265,16 +265,17 @@ public class GameView extends HorizontalLayout {
     public void scoreRechnungDoubt() {
         //if doubt gedrückt
         if (translateEnteredzahl(temp2) != ((Player) Playerlist.get(CurrentPlayer)).getRandomscore()) {
-            ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
-            updateScores();
-            CurrentPlayer = CurrentPlayer + 1;
-        }
-        else{
             ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
             updateScores();
             CurrentPlayer = CurrentPlayer + 1;
         }
+        else{
+            ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
+            updateScores();
+            CurrentPlayer = CurrentPlayer + 1;
+        }
     }
+
     public void scoreRechnungTrust(){
         // if trust gedrückt
         buttonDice();
