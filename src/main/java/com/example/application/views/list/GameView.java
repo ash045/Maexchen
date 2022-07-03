@@ -40,7 +40,9 @@ public class GameView extends HorizontalLayout {
     Integer numRounds;
     Integer pointLimit;
     List Playerlist = new ArrayList<>();
-    
+    double myScore = 0;
+    double zufallszahlVar = 0;
+    int CurrentPlayer =0;
     
     CrmService service;
     Integer zufallszahl; 
@@ -70,7 +72,7 @@ public class GameView extends HorizontalLayout {
         Playerlist.add(p5);
         Player p6 = new Player("Test6");
         Playerlist.add(p6);
-
+       
         updateScores();
         updateLabel();
     }
@@ -205,16 +207,16 @@ public class GameView extends HorizontalLayout {
     }
     
     
-    private HorizontalLayout submitScoreF () {
+    public HorizontalLayout submitScoreF () {
 
     	HorizontalLayout ownScore = new HorizontalLayout();
-    	NumberField myScore = new NumberField("Enter score..");
+    	NumberField myScoreField = new NumberField("Enter score..");
     	Button enterScoreB = new Button("Submit");
-    	    	
+    	Playerlist(i).setEnteredScore = myScoreField.getValue();    	
     	enterScoreB.addClickListener(scoreSubmitted ->
     			dicesAndScore.removeAll());
     	
-    	ownScore.add(myScore, enterScoreB);
+    	ownScore.add(myScoreField, enterScoreB);
     	return ownScore;	
     }
     
@@ -238,14 +240,33 @@ public class GameView extends HorizontalLayout {
     }
     
     //Erzeugt eine 0 <Zufallsnummer <= 6, um ein Bild (würfel) zufällig auszusuchen
-    private Integer zufallszahl() {
+    public Integer zufallszahl() {
     	int min = 1;
 		int max = 6;
 
 		Random random = new Random();
 
 		zufallszahl = random.nextInt(max) + min;
+        zufallszahlVar = zufallszahl;
     	return zufallszahl;
+    }
+
+    public double scoreRechnungClassic() {
+        //if doubt gedrückt
+        if (myScore != zufallszahlVar) {
+            ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
+        }
+        else{
+            ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
+        }
+        // if trust gedrückt
+        this.buttonDice();
+        if (((Player) Playerlist.get(CurrentPlayer)).getEnteredscore() > ((Player) Playerlist.get(CurrentPlayer+1)).getRandomscore()) {
+            ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
+        }
+        else{
+            ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
+        }
     }
 
 }
