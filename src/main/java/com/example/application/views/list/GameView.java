@@ -251,7 +251,7 @@ public class GameView extends HorizontalLayout {
     	return zufallszahl;
     }
 
-    public double scoreRechnungClassic() {
+    public void scoreRechnungClassic() {
         //if doubt gedrückt
         if (myScore != zufallszahlVar) {
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
