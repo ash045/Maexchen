@@ -16,6 +16,8 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import oshi.hardware.CentralProcessor;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -174,17 +176,17 @@ public class GameView extends HorizontalLayout {
     
     ////Wird grade bearbeitet
     //Hier wird das Bild geholt für den Tisch
-    private Image tableimage() {
+    /*private Image tableimage() {
     	Image img = new Image("images/tisch.jpg","Tisch");
     	img.setSizeFull();
         return img;
-    }
+    }*/
     
     //Hier wird der GameScreen konfiguriert, grade nur das Bild
     private VerticalLayout configGameScreen() {
     	
     	VerticalLayout table = new VerticalLayout();
-    	table.add(tableimage());
+    	//table.add(tableimage());
     	table.add(buttonDice());
     	table.setSizeFull();
         return table;
@@ -211,7 +213,6 @@ public class GameView extends HorizontalLayout {
     	return dicesAndScore;
     }
     
-    
     public HorizontalLayout submitScoreF () {
 
     	enterScoreB.addClickListener(scoreSubmitted -> submitButtonFunctionality());
@@ -224,7 +225,9 @@ public class GameView extends HorizontalLayout {
         Double temp = myScoreField.getValue();
         int temp2 = temp.intValue();
     	((Player) Playerlist.get(CurrentPlayer)).setEnteredscore(translateEnteredzahl(temp2)); 
-        dicesAndScore.removeAll(); 
+        myScoreField.clear();
+        dicesAndScore.removeAll();
+        CurrentPlayer = CurrentPlayer + 1;
     }
 
     //Hier wird das Würfelnummerbild zufallig ausgewählt
