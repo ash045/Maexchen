@@ -51,6 +51,7 @@ public class GameView extends HorizontalLayout {
     Integer zufallszahlVar2 = 0;
 
     int CurrentPlayer =0;
+    int temp2 = 0;
     
     CrmService service;
     Integer zufallszahl; 
@@ -75,9 +76,9 @@ public class GameView extends HorizontalLayout {
         Button trustbutton = new Button("Trust");
         Button doubtbutton = new Button("Doubt");
         trust.add(trustbutton);
-        trustbutton.addClickListener(event -> scoreRechnungTrust());
+        trustbutton.addClickListener(click -> scoreRechnungTrust());
         trust.add(doubtbutton);
-        trustbutton.addClickListener(event -> scoreRechnungDoubt());
+        doubtbutton.addClickListener(click2 -> scoreRechnungDoubt());
 
         return trust;
         
@@ -263,15 +264,13 @@ public class GameView extends HorizontalLayout {
 
     public void scoreRechnungDoubt() {
         //if doubt gedrückt
-        if (myScore != ((Player) Playerlist.get(CurrentPlayer)).getRandomscore()) {
+        if (translateEnteredzahl(temp2) != ((Player) Playerlist.get(CurrentPlayer)).getRandomscore()) {
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
             updateScores();
-            nextPlayer();
         }
         else{
             ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
             updateScores();
-            nextPlayer();
         }
     }
     public void scoreRechnungTrust(){
@@ -280,16 +279,13 @@ public class GameView extends HorizontalLayout {
         if (((Player) Playerlist.get(CurrentPlayer)).getEnteredscore() > ((Player) Playerlist.get(CurrentPlayer+1)).getRandomscore()) {
             ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
             updateScores();
-            nextPlayer();
+            
         }
         else{
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
             updateScores();
-            nextPlayer();
+            
         }
-    }
-    private void nextPlayer(){
-        CurrentPlayer = CurrentPlayer +1;
     }
 
     private Integer translateZufallszahl(Integer z1, Integer z2){
