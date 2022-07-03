@@ -65,21 +65,6 @@ public class GameView extends HorizontalLayout {
         //this.getElement().getStyle().set("background-image","url('images/tisch.jpg')");
         configFields();
         add(getScoreboard(), configGameScreen());
-        Player TestPlayer = new Player("Test");
-        Playerlist.add(TestPlayer);
-        Player p1 = new Player("Test1");
-        Playerlist.add(p1);
-        Player p2 = new Player("Test2");
-        Playerlist.add(p2);
-        Player p3 = new Player("Test3");
-        Playerlist.add(p3);
-        Player p4 = new Player("Test4");
-        Playerlist.add(p4);
-        Player p5 = new Player("Test5");
-        Playerlist.add(p5);
-        Player p6 = new Player("Test6");
-        Playerlist.add(p6);
-       
         updateScores();
         updateLabel();
     }
@@ -277,18 +262,29 @@ public class GameView extends HorizontalLayout {
         //if doubt gedrückt
         if (myScore != ((Player) Playerlist.get(CurrentPlayer)).getRandomscore()) {
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
+            updateScores();
+            nextPlayer();
         }
         else{
             ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
+            updateScores();
+            nextPlayer();
         }
         // if trust gedrückt
-        this.buttonDice();
+        buttonDice();
         if (((Player) Playerlist.get(CurrentPlayer)).getEnteredscore() > ((Player) Playerlist.get(CurrentPlayer+1)).getRandomscore()) {
             ((Player) Playerlist.get(CurrentPlayer+1)).setScore(((Player) Playerlist.get(CurrentPlayer+1)).getScore()-1);
+            updateScores();
+            nextPlayer();
         }
         else{
             ((Player) Playerlist.get(CurrentPlayer)).setScore(((Player) Playerlist.get(CurrentPlayer)).getScore()-1);
+            updateScores();
+            nextPlayer();
         }
+    }
+    private void nextPlayer(){
+        CurrentPlayer = CurrentPlayer +1
     }
 
     private Integer translateZufallszahl(Integer z1, Integer z2){
